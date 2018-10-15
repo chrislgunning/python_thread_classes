@@ -1,10 +1,12 @@
 import os
+import threading
 import time
 
-class ExternalProcessThread(object):
+class ExternalProcessThread(threading.Thread):
     
     
-    def __init__(self,  process_name,  command):
+    def __init__(self,  process_name,  command,  *args, **kwargs):
+        super(ExternalProcessThread, self).__init__(*args, **kwargs)
         self.process_name = process_name
         self.command = command
         self.kill_command = 'killall -9 {0}'.format(self.process_name)
